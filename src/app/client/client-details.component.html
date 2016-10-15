@@ -1,26 +1,59 @@
 <div class="container">
-	<h1>Client Form</h1>
-	<form>
-		<div class="form-group">
-			<label for="fname">First Name</label>
-			<input #spy type="text" class="form-control" [(ngModel)]="client.firstName" name="fname" id="fname" required>
-            <br>TODO: remove this: {{spy.className}}
-		</div>
-		<div class="form-group">
-			<label for="lname">Last Name</label>
-			<input type="text" class="form-control" [(ngModel)]="client.lastName" name="lname" id="lname" required>
-		</div>
-		<div class="form-group">
-			<label for="initials">Initials</label>
-			<input type="text" class="form-control" [(ngModel)]="client.initials" name="initials" id="initials" required>
-		</div>
-		<div class="form-group">
-			<label for="title">Title</label>
-			<select class="form-control" [(ngModel)]="client.titleId" name="title" id="title">
+	<div [hidden]="submitted">
+		<h1>Client Form</h1>
+		<form *ngIf="active" (ngSubmit)="onSubmit()" #clientForm="ngForm">
+			<div class="form-group">
+				<label for="fname">First Name</label>
+				<input #spy type="text" class="form-control" [(ngModel)]="client.firstName" #fname="ngModel" name="fname" id="fname" required>
+				<div [hidden]="fname.valid || fname.pristine" class="alert alert-danger">
+					First Name is required
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lname">Last Name</label>
+				<input type="text" class="form-control" [(ngModel)]="client.lastName" #lname="ngModel" name="lname" id="lname" required>
+				<div [hidden]="lname.valid || lname.pristine" class="alert alert-danger">
+					Last Name is required
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="initials">Initials</label>
+				<input type="text" class="form-control" [(ngModel)]="client.initials" #initials="ngModel" name="initials" id="initials" required>
+				<div [hidden]="initials.valid || initials.pristine" class="alert alert-danger">
+					Initial(s) required
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="title">Title</label>
+				<select class="form-control" [(ngModel)]="client.titleId" name="title" id="title">
                 <option *ngFor="let title of titles" [value]="title.id">{{title.desc}}</option>
             </select>
-		</div>
+			</div>
+			<button type="button" class="btn btn-default" (click)="newClient()">New Client</button>
 
-		<button type="submit" class="btn btn-default">Submit</button>
-	</form>
+			<button type="submit" class="btn btn-default" [disabled]="!clientForm.form.valid">Submit</button>
+		</form>
+	</div>
+
+	<div [hidden]="!submitted">
+		<h2>You submitted the following:</h2>
+		<div class="row">
+			<div class="col-xs-3">First Name</div>
+			<div class="col-xs-9  pull-left">{{ client.firstName }}</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3">Last Name</div>
+			<div class="col-xs-9  pull-left">{{ client.lastName }}</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3">Initials</div>
+			<div class="col-xs-9 pull-left">{{ client.initials }}</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3">Title</div>
+			<div class="col-xs-9 pull-left">{{ titleForId(client.titleId) }}</div>
+		</div>
+		<br>
+		<button class="btn btn-default" (click)="submitted=false">Edit</button>
+	</div>
 </div>
