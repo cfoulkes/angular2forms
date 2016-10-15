@@ -1,0 +1,26 @@
+<div class="container">
+	<h1>Client Form</h1>
+	<form>
+		<div class="form-group">
+			<label for="fname">First Name</label>
+			<input #spy type="text" class="form-control" [(ngModel)]="client.firstName" name="fname" id="fname" required>
+            <br>TODO: remove this: {{spy.className}}
+		</div>
+		<div class="form-group">
+			<label for="lname">Last Name</label>
+			<input type="text" class="form-control" [(ngModel)]="client.lastName" name="lname" id="lname" required>
+		</div>
+		<div class="form-group">
+			<label for="initials">Initials</label>
+			<input type="text" class="form-control" [(ngModel)]="client.initials" name="initials" id="initials" required>
+		</div>
+		<div class="form-group">
+			<label for="title">Title</label>
+			<select class="form-control" [(ngModel)]="client.titleId" name="title" id="title">
+                <option *ngFor="let title of titles" [value]="title.id">{{title.desc}}</option>
+            </select>
+		</div>
+
+		<button type="submit" class="btn btn-default">Submit</button>
+	</form>
+</div>
