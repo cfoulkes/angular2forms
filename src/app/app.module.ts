@@ -7,20 +7,23 @@ import { ClientModule } from './client/client.module';
 
 import { AppComponent } from './app.component';
 import { ClientModelDrivenComponent } from './client-model-driven/client-model-driven.component';
+import { ModelDrivenComponent } from './model-driven/model-driven.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ClientModelDrivenComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    ClientModule,
-    ReactiveFormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ClientModelDrivenComponent,
+        ModelDrivenComponent,
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpModule,
+        ClientModule,
+        ReactiveFormsModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

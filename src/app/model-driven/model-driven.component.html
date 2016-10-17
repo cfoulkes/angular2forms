@@ -1,0 +1,59 @@
+<div class="container">
+	<div [hidden]="submitted">
+		<h1>Model Form</h1>
+		<form [formGroup]="clientForm">
+			<div class="form-group">
+				<label for="fname">First Name</label>
+				<input type="text" formControlName="fname" id="fname">
+				<div [hidden]="clientForm.controls.fname.valid || clientForm.controls.fname.pristine" class="alert alert-danger">
+					First Name is required
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lname">Last Name</label>
+				<input type="text" formControlName="lname" id="lname">
+				<div [hidden]="clientForm.controls.lname.valid || clientForm.controls.lname.pristine" class="alert alert-danger">
+					Last Name is required
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="initials">Initials</label>
+				<input type="text" formControlName="initials" id="initials">
+				<div [hidden]="clientForm.controls.initials.valid || clientForm.controls.initials.pristine" class="alert alert-danger">
+					Initial(s) required
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="title">Title</label>
+				<select class="form-control" formControlName="title" id="title">
+                <option *ngFor="let title of titles" [value]="title.id">{{title.desc}}</option>
+            </select>
+			</div>
+			<!--<button type="button" class="btn btn-default" (click)="newClient()">New Client</button>
+
+			<button type="submit" class="btn btn-default" [disabled]="!clientForm.form.valid">Submit</button>-->
+		</form>
+	</div>
+
+	<div [hidden]="!submitted">
+		<h2>You submitted the following:</h2>
+		<div class="row">
+			<div class="col-xs-3">First Name</div>
+			<div class="col-xs-9  pull-left">{{ client.firstName }}</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3">Last Name</div>
+			<div class="col-xs-9  pull-left">{{ client.lastName }}</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3">Initials</div>
+			<div class="col-xs-9 pull-left">{{ client.initials }}</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-3">Title</div>
+			<div class="col-xs-9 pull-left">{{ titleForId(client.titleId) }}</div>
+		</div>
+		<br>
+		<button class="btn btn-default" (click)="submitted=false">Edit</button>
+	</div>
+</div>
