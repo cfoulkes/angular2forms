@@ -1,7 +1,13 @@
-<div class="card">
+<div class="card" [formGroup]="addressGroup">
 	<label for="addr1">Address Line 1</label>
 	<input type="text" formControlName="addr1" id="addr1">
-	<div [hidden]="addrGroup.controls.addr1.valid || addrGroup.controls.addr1.pristine" class="alert alert-danger">
+	<div [hidden]="addressGroup.controls.addr1.valid || addressGroup.controls.addr1.pristine" class="alert alert-danger">
 		Address Line 1 is required
+	</div>
+
+	<label for="city">City</label>
+	<input type="text" formControlName="city" id="city">
+	<div [hidden]="addressGroup.controls.city.valid || addressGroup.controls.city.pristine" class="alert alert-danger">
+		City is required
 	</div>
 </div>

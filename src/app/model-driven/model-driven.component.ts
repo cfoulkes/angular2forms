@@ -29,7 +29,11 @@ export class ModelDrivenComponent implements OnInit {
             fname: ['', Validators.required],
             lname: ['', Validators.required],
             initials: '',
-            title: ['', Validators.required]
+            title: ['', Validators.required],
+            address: this.formBuilder.group({
+                addr1: ['', Validators.required],
+                city: ['', Validators.required]
+            })
         });
 
         this.subscribeToFormChanges();
