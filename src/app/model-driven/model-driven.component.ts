@@ -31,6 +31,14 @@ export class ModelDrivenComponent implements OnInit {
             initials: '',
             title: ['', Validators.required]
         });
+
+        this.subscribeToFormChanges();
+    }
+
+    subscribeToFormChanges() {
+        const formValueChanges$ = this.clientForm.valueChanges;
+
+        formValueChanges$.subscribe(console.log);
     }
 
     onSubmit() {

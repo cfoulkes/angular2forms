@@ -7,11 +7,13 @@ import { ClientModule } from './client/client.module';
 
 import { AppComponent } from './app.component';
 import { ModelDrivenComponent } from './model-driven/model-driven.component';
+import { AddressComponent } from './address/address.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         ModelDrivenComponent,
+        AddressComponent,
     ],
     imports: [
         BrowserModule,
