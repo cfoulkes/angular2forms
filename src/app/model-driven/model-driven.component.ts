@@ -4,9 +4,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { Client } from '../client/client'
 
 @Component({
-  selector: 'model-driven',
-  templateUrl: './model-driven.component.html',
-  styleUrls: ['./model-driven.component.css']
+    selector: 'model-driven',
+    templateUrl: './model-driven.component.html',
+    styleUrls: ['./model-driven.component.css']
 })
 export class ModelDrivenComponent implements OnInit {
 
@@ -22,15 +22,36 @@ export class ModelDrivenComponent implements OnInit {
 
     clientForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+    constructor(private formBuilder: FormBuilder) { }
 
-  ngOnInit() {
-    this.clientForm = this.formBuilder.group({
-      fname: ['', Validators.required],
-      lname: ['', Validators.required],
-      initials: '',
-      title: ['', Validators.required]
-    });
-  }
+    ngOnInit() {
+        this.clientForm = this.formBuilder.group({
+            fname: ['', Validators.required],
+            lname: ['', Validators.required],
+            initials: '',
+            title: ['', Validators.required]
+        });
+    }
+
+    onSubmit() {
+        console.log('onSubmit');
+        this.submitted = true;
+    }
+
+    newClient() {
+        this.client = { id: 100, firstName: '', lastName: '', initials: '', titleId: 1 };
+        this.active = false;
+        setTimeout(() => this.active = true, 0);
+    }
+
+    titleForId(id): String {
+        var titleStr = '';
+        this.titles.forEach(function (title) {
+            if (title.id === id) {
+                titleStr = title.desc;
+            }
+        });
+        return titleStr;
+    }
 
 }
