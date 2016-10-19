@@ -1,5 +1,7 @@
 For Template Driven Form management Angular 2 provides directives that can be applied to a form and its elements to manage the data that the form represents.
 
+STRUCTURE:
+
 Starting with a very simple form. 
 
 <form>
@@ -142,3 +144,56 @@ controls: Object
     ...
     firstName: FormControl
 ...
+
+
+VALIDATION:
+
+Out of the box, angular provides four validators (required, minLength, maxLength and pattern), they are applied to input elemnts as directives.
+
+e.g. 
+<form #theForm="ngForm">
+...
+		<input type="text" id="fname" placeholder="First Name" ngModel name="firstName" #fn="ngModel" required>
+...
+
+Then the valid flag for the form, or for the element can be checked. Note that the status flags roll up the hierarchy.
+
+<p>Form Valid: {{theForm.valid}}</p>
+<p>First Name Valid: {{fn.valid}}</p>
+
+along with the valid flag, the validators add a specific property the errors property of the control (FormControl instance) 
+
+so the expression:
+
+<p>First Name Errors: {{fn.errors}}</p>
+
+would produce the following when the text field is empty:
+
+First Name Errors: { "required": true }
+
+We typically access these control specific error flags to determine if an error message should be displayed to the user.
+
+<form #theForm="ngForm">
+...
+		<input type="text" id="fname" placeholder="First Name" ngModel name="firstName" #fn="ngModel" required>
+        <div [hidden]="fn.valid || fn.pristine" class="alert alert-danger">
+		    First Name is required
+    	</div>
+...
+
+The above shows an error div that is hidden when the first name control is valid or it is pristine (when true this flag indicates the user hasn't entered this field yet, and so prevents the error message showing when an empty form is first displayed).
+In this example we don't need to check the errors property as there is only one validator.
+
+If we add another validator, then we use the errors property to determine which error message to display:
+
+
+...
+		<input type="text" id="fname" placeholder="First Name" ngModel name="firstName" #fn="ngModel" required minlength="5">
+        <div [hidden]="!fn.errors?.required || fn.pristine" class="alert alert-danger">
+		    First Name is required
+    	</div>
+        <div [hidden]="!fn.errors?.minlength || fn.pristine" class="alert alert-danger">
+            First Name must be at least 5 characters in length.
+        </div>
+...
+
