@@ -101,23 +101,44 @@ We can access these properties in the html by exposing another local template va
 
 As we add the ngModel directive (and name) to the an input element of the form, a new FormControl object is added to the control collection in the forms FormGroup. 
 
+The FormGroup class is also an instance of FormControl, and so the controls within a page may be grouped into sub-groups. This is achieved by applying the ngModelGroup directive to a container element. 
 
-<form>
+<form #theForm="ngForm">
 	<div>
-        <label for="fname">First Name</label>
-        <input type="text" id="fname" placeholder="First Name" ngModel name="firstName">
+		<label for="fname">First Name</label>
+		<input type="text" id="fname" placeholder="First Name" #fn="ngModel" ngModel name="firstName">
 	</div>
-	<div ngModelGroup name="address">
-        <label for="addr">Street</label>
-        <input type="text" id="street" placeholder="Street" ngModel name="street">
-        <label for="addr">City</label>
-        <input type="text" id="city" placeholder="City" ngModel name="city">
+
+	<div ngModelGroup="address" #address="ngModelGroup">
+		<div>
+			<label for="addr">Street</label>
+			<input type="text" id="street" placeholder="Street" ngModel name="street">
+		</div>
+		<div>
+			<label for="addr">City</label>
+			<input type="text" id="city" placeholder="City" ngModel name="city">
+		</div>
 	</div>
 </form>
 
+<p>Form Value: {{theForm.value | json}}</p>
+<p>Form Dirty: {{theForm.dirty}}</p>
+<p>FirstName Value: {{fn.value | json}}</p>
+<p>FirstName Dirty: {{fn.dirty | json}}</p>
+<p>Address Value: {{address.value | json}}</p>
+<p>Address Dirty: {{address.dirty | json}}</p>
 
-Template Driven forms management requires the FormsModule.
+The ouput from the form value expression now produces:
+Form Value: { "firstName": "", "address": { "street": "", "city": "" } }
 
-When the application imports the FormsModule, an instance of the NgForm directive is associated with each form in the application.
-Amongst other things this class maintains a collection of controls on the page and the overall status of the form (valid, dirty etc.)
-Each of the controls in the list (
+and the control list in the log output shows:
+
+controls: Object
+    address: FormGroup
+    ...
+        controls: Object
+            city: FormControl
+            street: FormControl
+    ...
+    firstName: FormControl
+...
