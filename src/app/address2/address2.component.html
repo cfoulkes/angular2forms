@@ -1,0 +1,13 @@
+<div class="card" [formGroup]="parentAddressGroup">
+	<label for="addr1">Address Line 1</label>
+	<input type="text" formControlName="addr1" id="addr1">
+	<div [hidden]="parentAddressGroup.controls.addr1.valid || parentAddressGroup.controls.addr1.pristine" class="alert alert-danger">
+		Address Line 1 is required
+	</div>
+
+	<label for="city">City</label>
+	<input type="text" formControlName="city" id="city">
+	<div [hidden]="parentAddressGroup.controls.city.valid || parentAddressGroup.controls.city.pristine" class="alert alert-danger">
+		City is required
+	</div>
+</div>

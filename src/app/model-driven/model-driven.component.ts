@@ -33,7 +33,8 @@ export class ModelDrivenComponent implements OnInit {
             address: this.formBuilder.group({
                 addr1: ['', Validators.required],
                 city: ['', Validators.required]
-            })
+            }),
+            address2: new FormGroup({})
         });
 
         this.subscribeToFormChanges();

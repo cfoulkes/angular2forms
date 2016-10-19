@@ -30,6 +30,7 @@
             </select>
 			</div>
 			<address [group]="clientForm.controls.address"></address>
+			<address2 [group]="clientForm.controls.address2"></address2>
 
 			<button type="button" class="btn btn-default" (click)="newClient()">New Client</button>
 			<button type="submit" class="btn btn-default" [disabled]="!clientForm.valid">Submit</button>

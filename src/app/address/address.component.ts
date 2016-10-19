@@ -15,8 +15,16 @@ export class AddressComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
+        console.log('Adress init');
         console.log(this.addressGroup);
-        
+
+        this.subscribeToFormChanges();
     }
+
+    subscribeToFormChanges() {
+        const formValueChanges$ = this.addressGroup.valueChanges;
+        formValueChanges$.subscribe(x => console.log('Address2Changes: ' + x));
+    }
+
 
 }

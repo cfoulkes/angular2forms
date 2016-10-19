@@ -8,12 +8,14 @@ import { ClientModule } from './client/client.module';
 import { AppComponent } from './app.component';
 import { ModelDrivenComponent } from './model-driven/model-driven.component';
 import { AddressComponent } from './address/address.component';
+import { Address2Component } from './address2/address2.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         ModelDrivenComponent,
         AddressComponent,
+        Address2Component,
     ],
     imports: [
         BrowserModule,
