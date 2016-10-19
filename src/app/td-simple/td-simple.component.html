@@ -1,14 +1,14 @@
 <form #theForm="ngForm">
-	<div>
+	<!--<div>
 		<label for="fname">First Name</label>
 		<input type="text" id="fname" placeholder="First Name" name="firstName">
-	</div>
-	<!--<div>
+	</div>-->
+	<div>
 		<label for="fname">First Name</label>
 		<input type="text" id="fname" placeholder="First Name" #fn="ngModel" ngModel name="firstName">
 	</div>
 
-	<div ngModelGroup="address" #address="ngModelGroup">
+	<!--<div ngModelGroup="address" #address="ngModelGroup">
 		<div>
 			<label for="addr">Street</label>
 			<input type="text" id="street" placeholder="Street" ngModel name="street">
@@ -21,7 +21,7 @@
 </form>
 
 <p>Form Value: {{theForm.value | json}}</p>
-<p>Form Dirty: {{theForm.dirty | json}}</p>
+<p>Form Dirty: {{theForm.dirty}}</p>
 <!--<p>FirstName Value: {{fn.value | json}}</p>
 <p>FirstName Dirty: {{fn.dirty | json}}</p>
 <p>Address Value: {{address.value | json}}</p>

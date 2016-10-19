@@ -66,7 +66,40 @@ value: (...)
 valueChanges: (...)
 
 
+So far we have a form but it manages no controls. We add a control by using the ngModel directive along with the name attribute.
 
+<form #theForm="ngForm">
+	<div>
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" placeholder="First Name" ngModel name="firstName">
+	</div>
+</form>
+<p>Form Value: {{theForm.value | json}}</p>
+
+
+The theForm.Value now shows a single property with an initial value of an empty string:
+
+Form Value: { "firstName": "" }
+
+Typing data into the First Name input text box is immediately reflected in the interpolation output. If we display other properties through interpolation we would see them alter as well. 
+
+Looking in the controls collection in the log output we would see:
+
+controls: Object
+    firstName: FormControl
+
+And by expanding the FormControl object we would see that it contains a value property, status properties, validator properties and the same set of getter properties that were exposed by the NgForm class. 
+
+We can access these properties in the html by exposing another local template variable.
+
+...
+		<input type="text" id="fname" placeholder="First Name" #fn="ngModel" ngModel name="firstName">
+...
+<p>First Name Value: {{fn.value | json}}</p>
+<p>First Name Dirty: {{fn.dirty}}</p>
+
+
+As we add the ngModel directive (and name) to the an input element of the form, a new FormControl object is added to the control collection in the forms FormGroup. 
 
 
 <form>
