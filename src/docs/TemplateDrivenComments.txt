@@ -1,0 +1,90 @@
+For Template Driven Form management Angular 2 provides directives that can be applied to a form and its elements to manage the data that the form represents.
+
+Starting with a very simple form. 
+
+<form>
+	<div>
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" placeholder="First Name">
+	</div>
+</form>
+
+At the root is Template Driven Form management is the NgForm directive which is automatically applied to each form in an application when the FormsModule is imported. The NgForm manages the state of the form and all of the controls registered to it.
+
+To see the contents of the ngForm instance, we can access it as a local template variable: and display its value using interpolation expressions:
+
+<form #theForm="ngForm">
+	<div>
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" placeholder="First Name">
+	</div>
+</form>
+<p>Form Value: {{theForm.value | json}}</p>
+
+As we have registered no controls with the form, the output displays as:
+
+Form Value: {}
+
+We can also access the NgForm object in the Component class using @ViewChild:
+
+  @ViewChild('theForm')
+  ngForm: NgForm;
+
+or:
+
+  @ViewChild(NgForm)
+  ngForm: NgForm;
+
+The output from following log statement shows the structure of the NgForm object
+
+  ngOnInit() {
+    console.log(this.ngForm);
+  }
+
+giving:
+NgForm {_submitted: false, ngSubmit: EventEmitter, form: FormGroup}
+
+So the NgForm actually consists of the _submitted boolean property, the ngSubmit EventEmitter and an instance of the FormGroup class. The NgForm also exposes getter properties to access information about the state of the form, these generally access data in the FormGroup.
+
+control: (...)
+controls: (...)
+dirty: (...)
+disabled: (...)
+enabled: (...)
+errors: (...)
+formDirective: (...)
+invalid: (...)
+path: (...)
+pending: (...)
+pristine: (...)
+statusChanges: (...)
+submitted: (...)
+touched: (...)
+untouched: (...)
+valid: (...)
+value: (...)
+valueChanges: (...)
+
+
+
+
+
+<form>
+	<div>
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" placeholder="First Name" ngModel name="firstName">
+	</div>
+	<div ngModelGroup name="address">
+        <label for="addr">Street</label>
+        <input type="text" id="street" placeholder="Street" ngModel name="street">
+        <label for="addr">City</label>
+        <input type="text" id="city" placeholder="City" ngModel name="city">
+	</div>
+</form>
+
+
+Template Driven forms management requires the FormsModule.
+
+When the application imports the FormsModule, an instance of the NgForm directive is associated with each form in the application.
+Amongst other things this class maintains a collection of controls on the page and the overall status of the form (valid, dirty etc.)
+Each of the controls in the list (
