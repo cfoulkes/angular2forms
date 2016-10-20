@@ -197,3 +197,21 @@ If we add another validator, then we use the errors property to determine which 
         </div>
 ...
 
+We are using the Angular safe navigation operator (?.) in referencing the errors collection which saves us the trouble of testing if the errors collection is null or undefined.
+
+Note: there is a hasErrors method available on the FormControl class, so we could test for an error as follows:
+
+    fn.control.hasError('required')
+
+Remember, fn is an instance of NgModel, which wraps the FormControl object, exposing it as the "control" property.
+
+If we don't create local template variables for each of the controls, we access them through the form's controls collection, again employing the safe navigation operator:
+  
+    theForm.controls['firstName']?.required
+    theForm.controls['firstName']?.hasErrors('required')
+    theForm.controls.firstName?.required
+    theForm.controls.firstName?.hasErrors('required')
+
+
+to do - submit form...
+

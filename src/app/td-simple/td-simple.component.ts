@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'td-simple',
@@ -10,6 +10,9 @@ export class TdSimpleComponent implements OnInit {
 
   @ViewChild('theForm')
   ngForm: NgForm;
+
+  @ViewChild('fn')
+  ngModel: NgModel;
 
   @ViewChild(NgForm)
   ngForm2: NgForm;
@@ -26,6 +29,7 @@ export class TdSimpleComponent implements OnInit {
   ngOnInit() {
     console.log(this.ngForm);
     console.log(this.ngForm2);
+    console.log(this.ngModel);
   }
 
 }

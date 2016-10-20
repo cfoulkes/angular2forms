@@ -1,13 +1,25 @@
 <form #theForm="ngForm">
 	<div>
 		<label for="fname">First Name</label>
-		<input type="text" id="fname" placeholder="First Name" #fn="ngModel" ngModel name="firstName" required minlength="5">
-        <div [hidden]="!fn.errors?.required || fn.pristine" class="alert alert-danger">
-		    First Name is required
-    	</div>
-        <div [hidden]="!fn.errors?.minlength || fn.pristine" class="alert alert-danger">
-            First Name must be at least 5 characters in length.
-        </div>
+		<input type="text" id="fname" placeholder="First Name" #fn="ngModel" ngModel name="firstName"
+			required minlength="5">
+		<div [hidden]="!fn.errors?.required || fn.pristine" class="alert alert-danger">
+			First Name is required
+		</div>
+		<div [hidden]="!fn.errors?.minlength || fn.pristine" class="alert alert-danger">
+			First Name must be at least 5 characters in length.
+		</div>
+	</div>
+	<div>
+		<label for="lname">Last Name</label>
+		<input type="text" id="lname" placeholder="Last Name" #ln="ngModel" ngModel name="lastName"
+			required>
+		<div [hidden]="ln.valid || ln.pristine" class="alert alert-danger">
+			Last Name is required
+		</div>
+		<div [hidden]="theForm.controls['lastName']?.valid" class="alert alert-danger">
+			Last Name is required
+		</div>
 	</div>
 
 	<div ngModelGroup="address" #address="ngModelGroup">
@@ -33,3 +45,6 @@
 <p>Address Value: {{address.value | json}}</p>
 <p>Address Dirty: {{address.dirty | json}}</p>
 <p>{{fn.errors?.minlength}}</p>
+
+<p>FirstName hasError(required): {{fn.control.hasError('required') | json}}</p>
+<p>FirstName hasError(required): {{theForm.controls.firstName?.hasError('required') | json}}<p>FirstName hasError(required): {{theForm.controls['firstName']?.hasError('required') | json}}</p>
