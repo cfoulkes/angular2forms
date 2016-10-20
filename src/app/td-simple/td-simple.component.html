@@ -22,6 +22,7 @@
 		</div>
 	</div>
 
+    <label>Address</label>
 	<div ngModelGroup="address" #address="ngModelGroup">
 		<div>
 			<label for="addr">Street</label>
@@ -32,6 +33,15 @@
 			<input type="text" id="city" placeholder="City" ngModel name="city">
 		</div>
 	</div>
+
+    <label>Address2</label>
+    <address3 [form]="theForm" [name]="address2"></address3>
+
+    <!--<label>Address2</label>
+    <div ngModelGroup="address3" #address3="ngModelGroup">
+        {{address3.value | json}}
+        <address3 [aaa]="address3"></address3>
+    </div>-->
 </form>
 
 <p>Form Value: {{theForm.value | json}}</p>

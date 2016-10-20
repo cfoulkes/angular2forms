@@ -10,6 +10,7 @@ import { ModelDrivenComponent } from './model-driven/model-driven.component';
 import { AddressComponent } from './address/address.component';
 import { Address2Component } from './address2/address2.component';
 import { TdSimpleComponent } from './td-simple/td-simple.component';
+import { Address3Component } from './address3/address3.component';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { TdSimpleComponent } from './td-simple/td-simple.component';
         AddressComponent,
         Address2Component,
         TdSimpleComponent,
+        Address3Component,
     ],
     imports: [
         BrowserModule,
