@@ -1,22 +1,29 @@
-<form>
+<form [formGroup]="theForm" (ngSubmit)="onSubmit()">
 	<div>
 		<label for="fname">First Name</label>
-		<input type="text" id="fname" placeholder="First Name">
+		<input type="text" id="fname" placeholder="First Name" formControlName="firstName">
 	</div>
 	<div>
 		<label for="lname">Last Name</label>
-		<input type="text" id="lname" placeholder="Last Name">
+		<input type="text" id="lname" placeholder="Last Name" formControlName="lastName">
 	</div>
 
-	<div>
-    <label>Address</label>
+	<div formGroupName="address">
+		<label>Address</label>
 		<div>
 			<label for="addr">Street</label>
-			<input type="text" id="street" placeholder="Street">
+			<input type="text" id="street" placeholder="Street" formControlName="street">
 		</div>
 		<div>
 			<label for="city">City</label>
-			<input type="text" id="city" placeholder="City">
+			<input type="text" id="city" placeholder="City" formControlName="city">
 		</div>
 	</div>
+
+	<button type="submit" class="btn btn-default">Submit</button>
+
 </form>
+
+<p>Form Value: {{theForm.value | json}}</p>
+<p>Form Dirty: {{theForm.dirty}}</p>
+<p>Form Valid: {{theForm.valid}}</p>

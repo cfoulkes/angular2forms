@@ -1,0 +1,105 @@
+Model Driven Forms
+
+For Model Driven forms we need to import the ReactiveFormsModule into our application.
+One of the main criticisms of template Based Forms is that while they are easy to create, and follow patterns establishe in Angular 1, they are difficult to test, and difficult to manage programmatically, due to the fact that the component is not involved in setting up or manageing the structure of objects that manage the form. Model driven forms take the opposit approach; all of the form managemenrt objects are created programmatically in the component class itself. 
+
+However, behind the scenes, it is the same set of objects that are used to perform the management, instances of FormGroup and FormControl. The difference is where the responsibilty lies for construction and management of these objects.
+
+We will start with the same bare html as used in the template driven example.
+
+<form>  ///md-simple.component.html
+	<div>
+		<label for="fname">First Name</label>
+		<input type="text" id="fname" placeholder="First Name">
+	</div>
+	<div>
+		<label for="lname">Last Name</label>
+		<input type="text" id="lname" placeholder="Last Name">
+	</div>
+
+	<div>
+    <label>Address</label>
+		<div>
+			<label for="addr">Street</label>
+			<input type="text" id="street" placeholder="Street">
+		</div>
+		<div>
+			<label for="city">City</label>
+			<input type="text" id="city" placeholder="City">
+		</div>
+	</div>
+
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+and our component class starts off plain.
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'md-simple',
+  templateUrl: './md-simple.component.html',
+  styleUrls: ['./md-simple.component.css']
+})
+export class MdSimpleComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+As with the template driven approach, we create a tree structure comprised of FormControl and FormGroup classes. Each of these contains a set of flags such as valid, pristine as well as a value property. The FormControl reflects the stae of a single control, the FormGroup reflects the state of all of the collection of FormControl objects that it contains.
+
+So our simple page would need a hierarchy of FormGroup and FormCOntrol objects created as follows:
+
+import { FormGroup, FormControl } from '@angular/forms';
+...
+    theForm: FormGroup;
+
+    ngOnInit() {
+        this.theForm = new FormGroup({
+            firstName: new FormControl(''),
+            lastName: new FormControl(''),
+            address: new FormGroup({
+                street: new FormControl(''),
+                city: new FormControl
+            })
+        });
+    }
+...
+
+as we can see, each form control can take a string as a constructor parameter, this is used as an initial value for a control. Each form group is constructed with an instance of an object with named properties, each being either a FormControl or a FormGroup.
+
+So now we have the structure, we need to associate it with the form elemnts. This is achieved using the formGroup binding at the root form element, and formControlName, formGroupName directives which associate each element with a named property (FormControl or FormGroup instance respectively) in the object structure. 
+
+So we would have:
+
+<form [formGroup]="theForm" (ngSubmit)="onSubmit()">
+	<div>
+		<label for="fname">First Name</label>
+		<input type="text" id="fname" placeholder="First Name" formControlName="firstName">
+	</div>
+	<div>
+		<label for="lname">Last Name</label>
+		<input type="text" id="lname" placeholder="Last Name" formControlName="lastName">
+	</div>
+
+	<div formGroupName="address">
+		<label>Address</label>
+		<div>
+			<label for="addr">Street</label>
+			<input type="text" id="street" placeholder="Street" formControlName="street">
+		</div>
+		<div>
+			<label for="city">City</label>
+			<input type="text" id="city" placeholder="City" formControlName="city">
+		</div>
+	</div>
+
+	<button type="submit" class="btn btn-default">Submit</button>
+
+</form>
+
+Note that we no longer need to pass a reference to "theForm" as a parameter to the onSubmit method as the component already has access to it.

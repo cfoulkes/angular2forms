@@ -231,8 +231,5 @@ Note that the submit button is disabled if the form is invalid.
 
 
 
-Model Driven Forms
-
-Creating a new component, we start with the same bare html as used in the template driven example.
 
 
