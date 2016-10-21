@@ -113,12 +113,13 @@ We import Validators from the forms module and attach the validator(s) as a seco
 e.g. 
         this.theForm = new FormGroup({
             firstName: new FormControl('', Validators.required),
-            lastName: new FormControl(''),
+            lastName: new FormControl('', [Validators.required, Validators.maxLength(5)]),
             address: new FormGroup({
                 street: new FormControl(''),
                 city: new FormControl
             })
         });
+
 
 and we can error messages to the template in the same way as we did with the template driven example,
 
@@ -138,5 +139,24 @@ The controls property also exposes a get method so we could use:
 
 Or even use the hasErrors method, as we saw in the template driven example: 
 		theForm.controls.get('firstName').hasError('required')
+
+
+FormBuilder
+
+If you think writing the FormGroup/FormComponent structure is verbose, the FormBuilder, a helper class that provides a (slightly) simpler api.
+
+constructor(private formBuilder: FormBuilder){}
+
+....
+
+        this.theForm = this.formBuilder.group({
+            firstName: ['', Validators.required],
+            lastName: ['', [Validators.required, Validators.maxLength(5)]],
+            address: this.formBuilder.group({
+                street: [''],
+                city: ['']
+            })
+        });
+
 
 

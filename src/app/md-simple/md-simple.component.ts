@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
     selector: 'md-simple',
@@ -10,22 +10,32 @@ export class MdSimpleComponent implements OnInit {
 
     theForm: FormGroup;
 
-    constructor() { }
+    constructor(private formBuilder: FormBuilder) { }
 
     ngOnInit() {
-        this.theForm = new FormGroup({
-            firstName: new FormControl('', Validators.required),
-            lastName: new FormControl(''),
-            address: new FormGroup({
-                street: new FormControl(''),
-                city: new FormControl('')
-            })
-        });
-    }
+        // this.theForm = new FormGroup({
+        //     firstName: new FormControl('', Validators.required),
+        //     lastName: new FormControl('', [Validators.required, Validators.maxLength(5)]),
+        //     address: new FormGroup({
+        //         street: new FormControl(''),
+        //         city: new FormControl('')
+        //     })
+        // });
 
-    onSubmit() {
-        //do something with this.theForm
-        console.log('onSubmit: ' + JSON.stringify(this.theForm.value));
-    }
+        this.theForm = this.formBuilder.group({
+            firstName: ['', Validators.required],
+            lastName: ['', [Validators.required, Validators.maxLength(5)]],
+            address: this.formBuilder.group({
+                street: [''],
+                city: ['']
+            })
+    });
+
+}
+
+onSubmit() {
+    //do something with this.theForm
+    console.log('onSubmit: ' + JSON.stringify(this.theForm.value));
+}
 
 }
