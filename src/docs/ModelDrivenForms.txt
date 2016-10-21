@@ -103,3 +103,40 @@ So we would have:
 </form>
 
 Note that we no longer need to pass a reference to "theForm" as a parameter to the onSubmit method as the component already has access to it.
+
+Validation
+
+Model Driven forms use the same set of validators as Templte Driven forms do, except they are programmatically attached to FormControl objects programmatically in the component rather than automatically by using attributes in the form elements.
+
+We import Validators from the forms module and attach the validator(s) as a second parameter in the FormControl constructor.
+
+e.g. 
+        this.theForm = new FormGroup({
+            firstName: new FormControl('', Validators.required),
+            lastName: new FormControl(''),
+            address: new FormGroup({
+                street: new FormControl(''),
+                city: new FormControl
+            })
+        });
+
+and we can error messages to the template in the same way as we did with the template driven example,
+
+	<div>
+		<label for="fname">First Name</label>
+		<input type="text" id="fname" placeholder="First Name" formControlName="firstName">
+		<div [hidden]="!theForm.controls.firstName.errors?.required || theForm.controls.firstName.pristine" class="alert alert-danger">
+			First Name is required
+		</div>
+	</div>
+
+Instead of the hidden class we could use the ngIf directive:
+		<div *ngIf="theForm.controls.firstName.errors?.required && theForm.controls.firstName.touched">
+
+The controls property also exposes a get method so we could use:
+		theForm.controls.get('firstName').errors?.required
+
+Or even use the hasErrors method, as we saw in the template driven example: 
+		theForm.controls.get('firstName').hasError('required')
+
+

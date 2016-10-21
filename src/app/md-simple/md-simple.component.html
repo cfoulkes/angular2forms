@@ -2,6 +2,9 @@
 	<div>
 		<label for="fname">First Name</label>
 		<input type="text" id="fname" placeholder="First Name" formControlName="firstName">
+		<div [hidden]="!theForm.controls.firstName.errors?.required || theForm.controls.firstName.pristine" class="alert alert-danger">
+			First Name is required
+		</div>
 	</div>
 	<div>
 		<label for="lname">Last Name</label>
