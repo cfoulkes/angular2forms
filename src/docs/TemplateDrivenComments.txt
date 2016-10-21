@@ -37,7 +37,7 @@ or:
   @ViewChild(NgForm)
   ngForm: NgForm;
 
-The output from following log statement shows the structure of the NgForm object
+The output from following log statement displays the contents of the NgForm object
 
   ngOnInit() {
     console.log(this.ngForm);
@@ -213,5 +213,16 @@ If we don't create local template variables for each of the controls, we access 
     theForm.controls.firstName?.hasErrors('required')
 
 
-to do - submit form...
+SUBMIT Data:
+
+So far, all of the form attributes have caused a structure of objects to be created that manage the data and information about the state of each of the components in the form. There has been no code written in the component class to build this structure. So when we submit the form, and have the component class process the data, how does it access it? We've already seen one way, make a reference to the NgForm object using a @ViewChild directive. The other way, is to simply pass a reference to the local template variable in the ngSubmit attribute.
+
+<form #theForm="ngForm" (ngSubmit)="onSubmit(theForm)">
+...
+
+    <button type="submit" class="btn btn-default" [disabled]="!theForm.valid">Submit</button>
+...
+</form>
+
+Note that the submit button is disabled if the form is invalid.
 
