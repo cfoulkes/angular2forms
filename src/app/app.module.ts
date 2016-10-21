@@ -11,6 +11,7 @@ import { AddressComponent } from './address/address.component';
 import { Address2Component } from './address2/address2.component';
 import { TdSimpleComponent } from './td-simple/td-simple.component';
 import { Address3Component } from './address3/address3.component';
+import { MdSimpleComponent } from './md-simple/md-simple.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import { Address3Component } from './address3/address3.component';
         Address2Component,
         TdSimpleComponent,
         Address3Component,
+        MdSimpleComponent,
     ],
     imports: [
         BrowserModule,

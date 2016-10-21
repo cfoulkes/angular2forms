@@ -1,3 +1,5 @@
+Template Driven Forms.
+
 For Template Driven Form management Angular 2 provides directives that can be applied to a form and its elements to manage the data that the form represents.
 
 STRUCTURE:
@@ -225,4 +227,12 @@ So far, all of the form attributes have caused a structure of objects to be crea
 </form>
 
 Note that the submit button is disabled if the form is invalid.
+
+
+
+
+Model Driven Forms
+
+Creating a new component, we start with the same bare html as used in the template driven example.
+
 
