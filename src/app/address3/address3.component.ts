@@ -14,33 +14,14 @@ export class Address3Component implements OnInit {
   @Input('name')
   public name: string;
 
-  // @Input('formGroup')
-  //  public formGroup: FormGroup;
-
-  @Input('group')
-  // public addressFormGroup: FormGroup;
-  public modelGroup: NgModelGroup;
+  @Input('formGroup')
+  public formGroup: FormGroup;
 
   addressFormGroup: FormGroup;
-
-  //  thisAddressFormGroup: FormGroup;
 
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    // console.log('form ' + JSON.stringify(this.form.value));
-    // if (this.modelGroup) {
-    //   this.addressFormGroup = this.modelGroup.control;
-    // }
-
-    // if (this.addressFormGroup) {
-    //   console.log(this.addressFormGroup);
-    //   //this.addressFormGroup = this.formBuilder.group({});
-    // } else {
-    //   this.addressFormGroup = this.formBuilder.group({});
-    // }
-
-
     this.addressFormGroup = this.formBuilder.group({});
     this.addressFormGroup.addControl('street', new FormControl('', Validators.required));
     this.addressFormGroup.addControl('city', new FormControl('', Validators.required));

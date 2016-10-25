@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -13,6 +13,8 @@ export class MdSimpleComponent implements OnInit {
     constructor(private formBuilder: FormBuilder) { }
 
     ngOnInit() {
+        console.log('MdSimpleComponent.ngOnInit ');
+
         // this.theForm = new FormGroup({
         //     firstName: new FormControl('', Validators.required),
         //     lastName: new FormControl('', [Validators.required, Validators.maxLength(5)]),
@@ -28,7 +30,8 @@ export class MdSimpleComponent implements OnInit {
             address: this.formBuilder.group({
                 street: [''],
                 city: ['']
-            })
+            }),
+            address2: this.formBuilder.group({})
     });
 
 }

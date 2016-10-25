@@ -158,5 +158,64 @@ constructor(private formBuilder: FormBuilder){}
             })
         });
 
+Component Aggregation
+
+As mentioned in the template driven forms commentary, there is no magic hookups that take place when a child component with template driven markup is included in a parent form. As the only options I can think of, require building FormGroups and Form Controls explicitly, I will cover that here.
+
+As with a single form, the child component needs both a FormGroup/FormControl hierarchy, and appropriate FormGroupName FormControlName directives in the template.
+
+As an example, let's create an address component, and remove the address input elements from the main form.
+  
+we have: 
+
+<div [formGroup]="formGroup"> //address.component.html
+	<div>
+		<label for="addr">Street</label>
+		<input type="text" id="street" placeholder="street" formControlName="street">
+		<div [hidden]="!formGroup.controls.street.errors?.required || formGroup.controls.street.pristine"
+			class="alert alert-danger">
+			Street is required
+		</div>
+
+	</div>
+	<div>
+		<label for="addr">City</label>
+		<input type="text" id="city" placeholder="City" formControlName="city">
+		<div [hidden]="!formGroup.controls.city.errors?.required || formGroup.controls.city.pristine"
+			class="alert alert-danger">
+			City is required
+		</div>
+	</div>
+</div>
+
+and the associated section of the parent form is now:
+
+	<div>
+		<label>Address</label>
+		<address [formGroup]="theForm.controls.address"></address>
+	</div>
+
+So what's going on here? Well the address template looks very similar to our original parent form, we have the main div bound to a FormGroup and each of the input text elements have a formControlName associating themselves with FormControl objects within the FormGroup.
+
+If we look at address component class we see:
+
+  @Input('formGroup')
+  formGroup: FormGroup;
+	
+  ngOnInit() {
+    this.formGroup.addControl('street', new FormControl('', Validators.required));
+    this.formGroup.addControl('city', new FormControl('', Validators.required));
+  }
+ 	
+Whereas we instantiated an instance of the root FormGroup in the main form, here we are adding our FormControl objects to an instance of the FormGroup class that is passed in as an Input property (using [formGroup]="theForm.controls.address" in the main form template). The address FormGroup having been created oin the main page component class
+
+        this.theForm = this.formBuilder.group({
+            firstName: ['', Validators.required],
+            lastName: ['', [Validators.required, Validators.maxLength(5)]],
+            address: this.formBuilder.group({})
+
+			
+
+
 
 

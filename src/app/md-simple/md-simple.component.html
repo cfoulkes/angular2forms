@@ -2,17 +2,20 @@
 	<div>
 		<label for="fname">First Name</label>
 		<input type="text" id="fname" placeholder="First Name" formControlName="firstName">
-		<div [hidden]="!theForm.controls.firstName.errors?.required || theForm.controls.firstName.pristine" class="alert alert-danger">
+		<div [hidden]="!theForm.controls.firstName.errors?.required || theForm.controls.firstName.pristine"
+			class="alert alert-danger">
 			First Name is required
 		</div>
 	</div>
 	<div>
 		<label for="lname">Last Name</label>
 		<input type="text" id="lname" placeholder="Last Name" formControlName="lastName">
-		<div [hidden]="!theForm.controls.lastName.errors?.required || theForm.controls.lastName.pristine" class="alert alert-danger">
+		<div [hidden]="!theForm.controls.lastName.errors?.required || theForm.controls.lastName.pristine"
+			class="alert alert-danger">
 			Last Name is required
 		</div>
-		<div [hidden]="!theForm.controls.lastName.errors?.maxlength || theForm.controls.lastName.pristine" class="alert alert-danger">
+		<div [hidden]="!theForm.controls.lastName.errors?.maxlength || theForm.controls.lastName.pristine"
+			class="alert alert-danger">
 			Last Name cannot exceed 5 characters
 		</div>
 	</div>
@@ -27,6 +30,11 @@
 			<label for="city">City</label>
 			<input type="text" id="city" placeholder="City" formControlName="city">
 		</div>
+	</div>
+
+	<div>
+		<label>Address2</label>
+		<address4 [formGroup]="theForm.controls.address2"></address4>
 	</div>
 
 	<button type="submit" class="btn btn-default">Submit</button>

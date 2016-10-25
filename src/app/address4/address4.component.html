@@ -1,0 +1,19 @@
+<div [formGroup]="formGroup">
+	<div>
+		<label for="addr">Street</label>
+		<input type="text" id="street" placeholder="street" formControlName="street">
+		<div [hidden]="!formGroup.controls.street.errors?.required || formGroup.controls.street.pristine"
+			class="alert alert-danger">
+			Street is required
+		</div>
+
+	</div>
+	<div>
+		<label for="addr">City</label>
+		<input type="text" id="city" placeholder="City" formControlName="city">
+		<div [hidden]="!formGroup.controls.city.errors?.required || formGroup.controls.city.pristine"
+			class="alert alert-danger">
+			City is required
+		</div>
+	</div>
+</div>
